@@ -1,6 +1,8 @@
 # List of commands I used at first in the node (from Deepseek)
 # I don't think this script will run nor should it really its just a reference for commands I entered
 
+# For reference, the section of the paper and the benchmark results they got from STUN is in STUN_benchmarks.md
+
 # Update the package list
 sudo apt-get update
 
@@ -44,3 +46,58 @@ wget http://people.redhat.com/mingo/cfs-scheduler/tools/hackbench.
 
 # Compile it
 gcc -o hackbench hackbench.c -lpthread
+;\
+
+
+# NEW VERSION FOR HACKBENCH (much simpler yay)
+sudo apt-get update
+sudo apt-get install rt-tests
+
+hackbench # This will create 10 groups of 40 tasks each (400 total) and report the time taken.
+
+hackbench -p -T # Uses pipes and threads, often faster
+
+# Stats from above:
+# Time: 0.052
+
+# == FACE DETECTION WORKLOAD TEST ==
+# Download the pre-trained Haar cascade files for face and eye detection
+wget https://github.com/opencv/opencv/raw/master/data/haarcascades/haarcascade_frontalface_default.xml
+wget https://github.com/opencv/opencv/raw/master/data/haarcascades/haarcascade_eye.xml
+
+nano face_detection.py
+# Below this is python, i'll put it in face_detection.py
+
+# Example: Download a short test video (replace with your own)
+# wget http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4 -O test_video.mp4
+
+# Run the face detection benchmark
+python3 face_detection.py test_video.mp4
+
+# Stats from above script:
+# Total Execution Time: 15.181 seconds
+# Total Frames: 360
+# Frames Per Second (FPS): 23.714
+
+# == SYSBENCH ==
+# The paper used: "number of CPU cores x 10 threads"
+NUM_CORES=$(nproc)
+sysbench --threads=$(($NUM_CORES * 10)) --time=60 cpu run
+
+# Stats from above commands (most important seems to be events per second?):
+# events per second: 28830.07
+# but here are the rest:
+# General statistics:
+#     total time:                          60.0087s
+#     total number of events:              1730139
+
+# Latency (ms):
+#          min:                                    1.07
+#          avg:                                   13.54
+#          max:                                   86.25
+#          95th percentile:                       40.37
+#          sum:                             23432374.86
+
+# Threads fairness:
+#     events (avg/stddev):           4325.3475/253.75
+#     execution time (avg/stddev):   58.5809/1.27
