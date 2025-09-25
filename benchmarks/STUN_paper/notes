@@ -1,0 +1,5 @@
+try schedtool 
+run it on hackbench for 10 seconds? 10 times each loop 
+change different profiles in schedtool 
+
+with nice you can set numbers for schedtool 

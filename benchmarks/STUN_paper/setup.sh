@@ -57,6 +57,8 @@ hackbench # This will create 10 groups of 40 tasks each (400 total) and report t
 
 hackbench -p -T # Uses pipes and threads, often faster
 
+# what do pipes do 
+
 # Stats from above:
 # Time: 0.052
 
