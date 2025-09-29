@@ -7,7 +7,7 @@ NUM_RUNS=10
 # Adjust these hackbench parameters to get a ~10 second runtime on your machine.
 # -g: number of process groups
 # -l: number of loops per group
-GROUPS=40
+GROPS=40
 LOOPS=4000
 
 # Schedulers to test.
@@ -22,7 +22,7 @@ RESULTS_DIR="hackbench_results"
 mkdir -p "$RESULTS_DIR"
 
 echo "Starting hackbench benchmark across different schedulers..."
-echo "Parameters: $NUM_RUNS runs, $GROUPS groups, $LOOPS loops."a
+echo "Parameters: $NUM_RUNS runs, $GROPS groups, $LOOPS loops."a
 echo "========================================================"
 
 # Loop over each scheduler
@@ -36,7 +36,7 @@ for scheduler in "${SCHEDULERS[@]}"; do
   for i in $(seq 1 $NUM_RUNS); do
     
     # Base command for hackbench
-    HACKBENCH_CMD="hackbench -g $GROUPS -l $LOOPS"
+    HACKBENCH_CMD="hackbench -g 40 -l $LOOPS"
     
     # Prefix the command with schedtool based on the current scheduler
     case $scheduler in
