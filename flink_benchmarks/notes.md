@@ -19,3 +19,8 @@ MCFG="16;16;16" MQUERY="query1" FLINK_RATE="200000_600000" MPOLICY="ondemand" ./
 
 Here's the error:
 ![](error2.png)
+
+Okay error's been fixed!
+
+Here's the output log from the command I ran:
+(output log)[output.txt]
